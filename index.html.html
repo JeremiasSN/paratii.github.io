@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💛 Para ti ✨</title>
+
+    <style>
+        :root {
+            /* Variable CSS para el color favorito del usuario */
+            --color-favorito: #ff4477; 
+            --sombra-clara: 0px 0px 10px rgba(255,255,255,0.7);
+        }
+
+        body {
+            font-family: 'Poppins', 'Trebuchet MS', sans-serif; /* Fuente más moderna */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: linear-gradient(120deg, #ffb3c6, #ffdd94, #b5e8ff, #d7bfff);
+            background-size: 300% 300%;
+            animation: fondoAnimado 15s infinite alternate; /* Velocidad ajustada */
+        }
+
+        @keyframes fondoAnimado {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 100%; }
+        }
+
+        .hidden { display: none !important; }
+
+        h2 {
+            font-weight: 600; /* Ligeramente más grueso */
+            font-size: clamp(24px, 5vw, 40px); /* Responsive Font Size */
+            color: white;
+            text-shadow: 0px 0px 15px #ffffff, 0px 0px 30px #ffe6ff;
+            padding: 10px;
+        }
+
+        label {
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            text-shadow: 0px 0px 8px #ffffff;
+            display: block; /* Mejor manejo de espacio */
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="date"], textarea {
+            font-size: 18px;
+            border-radius: 12px;
+            padding: 10px;
+            border: 2px solid var(--color-favorito); /* Borde con color favorito */
+            box-shadow: var(--sombra-clara);
+            width: clamp(200px, 80%, 400px); /* Responsive Width */
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #ff4f87; /* Resaltado al enfocar */
+        }
+
+        button {
+            padding: 14px 30px;
+            cursor: pointer;
+            border-radius: 12px;
+            border: none;
+            background: var(--color-favorito); /* Usa color favorito */
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            transition: 0.4s ease-in-out;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 5px 15px rgba(0,0,0,0.2);
+            margin-top: 15px; /* Espacio superior */
+        }
+
+        button:hover {
+            filter: brightness(0.9);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .center {
+            text-align: center;
+            padding: 30px 15px;
+            min-height: 100vh; /* Ocupa al menos toda la altura */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centrado vertical */
+            align-items: center;
+        }
+
+        /* ❤️ CORAZONES DE MENÚ */
+        .menu-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .corazon-box {
+            width: 170px;
+            height: 150px;
+            clip-path: path("M 90 30 A 30 30 0 0 1 150 30 A 30 30 0 0 1 150 90 L 90 150 L 30 90 A 30 30 0 0 1 30 30 A 30 30 0 0 1 90 30 Z");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: linear-gradient(45deg, var(--color-favorito), #ff9ee2, #ff5f4f); /* Gradiente con color favorito */
+            background-size: 200% 200%;
+            animation: corazonColor 6s infinite alternate;
+            text-shadow: 0 0 10px #333; /* Sombra oscura para mejor contraste */
+            border: 3px solid white; /* Borde blanco para resaltar */
+        }
+
+        .corazon-box:hover {
+            transform: scale(1.15) rotate(-3deg);
+            filter: brightness(1.1);
+        }
+
+        @keyframes corazonColor {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* ✨ ESTRELLAS BRILLANTES */
+        .estrella {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffcceb; /* Brillo con tono rosa */
+            animation: brillo 2s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: 1000; /* Asegura que estén encima */
+        }
+
+        @keyframes brillo {
+            0% { transform: scale(0.5); opacity: .5; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(0.5); opacity: .5; }
+        }
+
+        /* 💖 CORAZÓN QUE SIGUE EL CURSOR */
+        .corazon {
+            position: fixed;
+            font-size: 30px; /* Tamaño ligeramente más grande */
+            pointer-events: none;
+            animation: flotar 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Curva de animación más suave */
+            color: var(--color-favorito); /* Usa color favorito */
+            text-shadow: 0 0 15px #ff87b3;
+            z-index: 999;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-60px) scale(2); opacity: 0; } /* Flotación más alta y grande */
+        }
+
+        /* ESTILO PARA CONTENIDO */
+        .content-area {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            margin-top: 20px;
+            width: clamp(250px, 90%, 600px);
+            max-height: 450px; /* Altura máxima para el contenido del poema */
+            overflow-y: auto; /* Scroll si el poema es muy largo */
+        }
+        
+        .poema-nav-btn {
+            padding: 10px 15px;
+            font-size: 18px;
+            margin: 0 10px;
+            width: 120px; /* Ancho fijo para botones de navegación */
+        }
+
+        /* Estilo para el contenido del poema */
+        .poema-texto {
+            white-space: pre-wrap; /* Respeta los saltos de línea y el espaciado */
+            text-align: center;
+            font-size: 1.15em;
+            line-height: 1.6;
+        }
+
+        /* Título del poema */
+        .poema-titulo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--color-favorito);
+            text-shadow: none;
+            margin-bottom: 15px;
+        }
+        
+        /* Estilos de Música y Videos */
+        .iframe-container {
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .video-item a {
+            display: block;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="interfaz1" class="center">
+    <h2>
+        Mira lo cursi que me has convertido,<br>
+        si esto no es amor entonces soy un loco sin motivo ✨
+    </h2>
+
+    <button id="nextButton" onclick="mostrarInterfaz2()">Siguiente</button>
+</div>
+
+<div id="interfaz2" class="hidden center">
+    <h2>
+        Qué bueno tenerte aquí, <span id="nombre-saludo"></span>…<br>
+        antes de continuar, cuéntame un poquito sobre ti ✨
+    </h2>
+
+    <div class="content-area">
+        <label for="nombre">¿Cómo te llamas?</label>
+        <input type="text" id="nombre" placeholder="Tu nombre secreto..." autocomplete="name"><br><br>
+
+        <label for="cumple">¿Cuándo es tu cumpleaños?</label>
+        <input type="date" id="cumple" autocomplete="bday"><br><br>
+
+        <label for="colorFav">Elige tu color favorito:</label>
+        <input type="color" id="colorFav" value="#ff4477"><br><br>
+    </div>
+
+    <button onclick="guardarDatos()">Continuar</button>
+</div>
+
+<div id="interfaz3" class="hidden center">
+    <h2 id="menu-saludo">¡Hola! ¿Qué te gustaría ver ahora? ✨</h2>
+
+    <div class="menu-container">
+        <div class="corazon-box" onclick="showPoemas()">Poemas</div>
+        <div class="corazon-box" onclick="showMusic()">Música</div>
+        <div class="corazon-box" onclick="showVideos()">Videos</div>
+        <div class="corazon-box" onclick="abrirInterfaz('escribir')">Escribir</div>
+        <div class="corazon-box" onclick="abrirInterfaz('final-image')">Reflexión</div>
+    </div>
+
+    <button onclick="irADespedida()">Finalizar</button>
+</div>
+
+<div id="poemas" class="hidden center">
+    <h2>Poemas ✨</h2>
+
+    <div class="content-area">
+        <h3 id="poema-titulo" class="poema-titulo"></h3>
+        <p id="poema-display" class="poema-texto" style="color:white; text-shadow:0 0 6px white;"></p>
+        <p style="color:white; font-size: 0.9em; opacity: 0.8; margin-top: 15px;">
+            <span id="poema-contador"></span>
+        </p>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <button class="poema-nav-btn" onclick="cambiarPoema(-1)">Anterior</button>
+        <button class="poema-nav-btn" onclick="cambiarPoema(1)">Siguiente</button>
+    </div>
+
+    <button onclick="volverMenu()">Volver al Menú</button>
+</div>
+
+<div id="music" class="hidden center">
+    <h2>Música 🎶</h2>
+    <div class="content-area" style="max-height: 600px;">
+        <p style="color:white; text-shadow:0 0 6px white; text-align: center; margin-bottom: 20px;">
+            ¡Sube el volumen! Te dedico estas canciones especiales.
+        </p>
+        <div id="music-links">
+            </div>
+    </div>
+    <button onclick="volverMenu()">Volver al Menú</button>
+</div>
+
+<div id="escribir" class="hidden center">
+    <h2>Escribe lo que quieras 📝</h2>
+
+    <textarea id="textoUsuario" placeholder="Escribe tu mensaje especial aquí..."></textarea>
+    <br><br>
+    <button onclick="guardarTexto()">Guardar Mensaje</button>
+    <p id="confirmacion" style="color:white; font-size:20px; margin-top: 10px; text-shadow:0 0 8px #fff;"></p>
+    <br>
+    <button onclick="volverMenu()">Volver</button>
+</div>
+
+<div id="videos" class="hidden center">
+    <h2>Videos 🎥</h2>
+    
+    <div class="content-area" id="videos-area" style="max-height: 600px;">
+        
+        <p style="color:var(--color-favorito); font-weight: bold; font-size: 1.1em; text-shadow:0 0 8px #fff; text-align: center; margin-bottom: 25px;">
+            Te dedico estos videos, para que sepas que eres la melodía de todos mis días y la razón de mis sonrisas. ¡Disfrútalos, mi amor!
+        </p>
+
+        <div id="video-links">
+            <h3 style="color:white; text-shadow:0 0 6px white; border-bottom: 2px solid #fff; padding-bottom: 5px; margin-bottom: 20px;">
+                Grupo 1: Vídeos Dedicados (12 Clips)
+            </h3>
+            
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@clippyasistente/video/7544842081559186693" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 1 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@aguszzkr/photo/7552976478535683339" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 2 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@eric._vz/video/7571277777144499457" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 3 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@minomivc/video/7554643447953509650" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 4 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@cuenta_dedicadaminovia4/photo/7557590527374396728" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 5 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@in_you_hearth/video/7567207815115197714" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 6 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@txt28022/video/7554608708572040456" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 7 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@un..poeta..nuevo/video/7571973625792826645" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 8 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@maria_anton29/video/7553054469278272786" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 9 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@bodyofanedit/video/7552352603301104910" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 10 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@framepotato/video/7543230288311192840" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 11 (TikTok)</button>
+                </a>
+            </div>
+            <div class="video-item" style="margin-bottom: 10px;">
+                <a href="https://www.tiktok.com/@vice.tt7/video/7571782812748057863" target="_blank">
+                    <button style="width: 100%; height: 40px; padding: 0;">Ver Vídeo 12 (TikTok)</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <button onclick="volverMenu()">Volver al Menú</button>
+</div>
+
+<div id="final-image" class="hidden center">
+    <h2>Mi Reflexión</h2>
+
+    <div class="content-area" style="padding: 30px; width: clamp(250px, 90%, 500px);">
+        <p style="
+            font-size: 1.5em; 
+            font-weight: bold; 
+            color: white; 
+            text-shadow: 0 0 15px var(--color-favorito); 
+            margin-bottom: 25px;
+        ">
+            "Eres el silencio después del ruido, la calma que necesitaba mi caos."
+        </p>
+        
+        <div style="border: 5px solid white; border-radius: 15px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+            <img id="custom-final-image" 
+                  src="image_38bbc6.jpg" 
+                  alt="Una imagen especial para ti." 
+                  style="width: 100%; display: block; max-height: 400px; object-fit: cover;">
+        </div>
+    </div>
+    
+    <button onclick="volverMenu()">Volver al Menú</button>
+</div>
+
+<div id="despedida" class="hidden center">
+    <h2 id="despedida-saludo">¡Hasta pronto! Espero que te haya gustado ✨</h2>
+
+    <p style="opacity:0.9; font-size:20px; color:white; text-shadow:0 0 6px white;">
+        Gracias por haber pasado por aquí 💛. Vuelve pronto para más cursilerías.
+    </p>
+
+    <button onclick="volverMenu()">Volver al menú</button>
+</div>
+
+
+<script>
+    // --- MÓDULO DE POEMAS (CARRUSEL) ---
+
+    // Array de objetos para almacenar los poemas con su título.
+    const poemasData = [
+        {
+            titulo: "1. Difícil de amar",
+            contenido: `Tengo miedo de no ser lo suficientemente suficiente
+
+para cuando alguien decida quedarse,
+para cuando alguien se anime a amarme.
+
+Tengo miedo porque no sé nada,
+porque tú sabes todo
+y siento que me dejarás olvidado.
+
+Siento que no valgo,
+que solo soy uno más,
+otro chico al que pudiste enamorar.
+
+¿Qué tan difícil soy de amar?
+¿De querer? ¿De esperar?
+De decir “no importa si él no sabe amar,
+yo le enseñaré lo que es sentirse amado”.
+
+Tengo miedo de que te canses
+porque no sé cómo amarte,
+porque no sé lo que es tener a alguien,
+y todo me hace sobrepensar.
+
+Sé que no vas a esperar,
+pero… ¿alguna vez pensaste
+que esto es nuevo para mí?
+
+Tal vez estoy equivocado,
+pero a veces siento que no soy el indicado,
+que al final… sí soy difícil de amar.`
+        },
+        {
+            titulo: "2. Cambio mis “no me gusta”",
+            contenido: `No me gusta el café,
+lo odio,
+pero el de tus ojos lo bebería diario.
+
+No me gusta el color blanco,
+pero lo busco en tu sonrisa.
+
+No me gusta el frío,
+pero si a ti te gusta,
+puedo congelarme contigo.
+
+Odio desvelarme,
+pero si tú no duermes,
+yo tampoco quiero dormir.
+
+No me gusta esperar,
+pero por ti lo haría sin pensar.
+Porque no importa cuánto tardes,
+sé que llegarás.
+
+No me gusta el ruido,
+pero si es tu voz,
+el silencio sobra.
+
+No me gusta caminar,
+pero contigo iría lejos,
+sin querer llegar,
+porque contigo el destino no importa.
+
+¿Qué tan enamorado estoy
+que cambio mis “no me gusta”
+por todo lo que tú amas?`
+        },
+        {
+            titulo: "3. Te encontré en lo simple",
+            contenido: `Empiezo a encontrarte en los pequeños momentos,
+en cómo hablas cuando te emocionas,
+en los silencios que compartimos
+sin sentirnos incómodos.
+
+No sé cuándo pasó,
+pero un día te miré
+y ya no vi a nadie más.
+
+No fue un amor de prisa,
+se fue dando despacio,
+en miradas que dicen más
+que cualquier palabra.
+
+Me estoy enamorando de ti,
+no por lo que haces,
+sino por cómo me siento
+cuando estoy contigo.
+
+Algunas personas no llegan de golpe,
+llegan despacio…
+y se quedan sin avisar.`
+        },
+        {
+            titulo: "4. Me gustas sin ruido",
+            contenido: `Me gusta la paz que me das cuando hablas suave,
+me gusta cómo tu presencia llena el espacio,
+incluso cuando no dices nada.
+
+No es solo que me atraigas,
+es que hay algo en ti que me calma,
+algo que me da curiosidad,
+algo que me recuerda
+que todavía puedo sentir sin miedo.
+
+Me gustas porque no intentas ser alguien más,
+porque en tu versión más simple,
+ya lo llenas todo.
+
+No sé si es destino o coincidencia,
+pero hay algo en ti…
+algo que me hace querer quedarme
+un ratito más.`
+        },
+        {
+            titulo: "5. Te fuiste sin mirar",
+            contenido: `Te besaría hasta que mis labios no puedan más,
+te abrazaría hasta que mis brazos pidan piedad,
+me quedaría a tu lado hasta que el alma se canse.
+Pero ya no estás.
+
+Te fuiste sin mirar,
+ya no te siento cerca,
+ya no te puedo soñar.
+
+Y aunque mi cabeza me grita que no volverás,
+hay una parte de mí que sigue esperando.
+
+Vuelve, amor mío,
+quédate conmigo,
+calma este desconsuelo
+que tanto duele.`
+        },
+        {
+            titulo: "6. No quiero un querer a medias",
+            contenido: `Quiero quererte y que me quieras,
+quiero abrazarte y que me abraces,
+quiero besarte y que me beses.
+
+No a medias, ni de vez en cuando,
+sino siempre.
+
+No quiero un querer a medias,
+ni un abrazo tibio,
+ni un beso sin alma.
+Porque eso no es amor de verdad.
+
+Quiero quererte y que me quieras,
+sin miedo, sin pausas, sin dudas.
+Porque yo no quiero un querer a medias.`
+        },
+        {
+            titulo: "7. No te culpo por no verme",
+            contenido: `No te culpo por no verme,
+por no sentir lo que siento,
+por no temblar cuando te nombro,
+por no entender mi silencio.
+
+Yo solo te quiero, sin exigir ni pedir,
+con el corazón abierto aunque no vengas a mí.
+
+Te miraba de lejos, como quien mira las estrellas,
+sin saber si algún día podría tocarlas.
+
+Te quise en silencio, sin pedirte nada,
+solo soñando con que un día me miraras de la misma forma.
+
+Pero tus ojos buscaban otros,
+tu risa no era para mí,
+y aunque dolió en el alma,
+me alegra haberte querido así.
+
+Me gustas, ¿sabes? Así, de verdad.
+Me gustas cuando te ríes, cuando caminas, cuando no estás.
+
+Pero tú nunca te diste cuenta,
+nunca viste mi mirar,
+y yo solo me quedé pensando
+si algún día me llegarás a amar.`
+        },
+        {
+            titulo: "8. Cómo hablarte",
+            contenido: `Cómo hablarte
+
+sin entregarte mi corazón
+en bandeja de plata de nuevo.
+
+Cómo hablarte sin desearte, mi amor,
+sin mirarte, sin soñarte.
+
+Cómo hablarte como amante,
+como amiga,
+como un simple ser humano.
+
+Cómo verte sin quererte de vuelta,
+sin quererte entera,
+sin quererte mía,
+sin saberte asociar conmigo.
+
+Amar sin prejuicio,
+sin historia,
+sin peso ni pasado.
+
+Llévame
+si lo encuentras.
+
+Llévame contigo
+donde podamos entregarnos,
+donde podamos amarnos sin dudas,
+donde podamos hablarlo sin censura.
+
+Donde el “te amo”
+vaya seguido de tu nombre
+y a nadie le importe.
+
+Que a mí no me importe nada más
+que sentirte,
+sentirnos.`
+        },
+        {
+            titulo: "9. Eco en el silencio",
+            contenido: `Me haces falta en todos mis silencios
+en esos momentos donde no digo nada, pero pienso todo.
+En las pausas,
+donde antes había tu voz y ahora solo cabe el eco.
+
+No te pienso todo el tiempo, pero te apareces en los segundos más tranquilos,
+como si el alma todavía no hubiera entendido que ya no estás.`
+        },
+        {
+            titulo: "10. Visita en el Sueño",
+            contenido: `Volviste a aparecer
+en ese lugar
+donde el alma aún no sabe soltar.
+
+No dijiste nada,
+pero tus ojos hablaban
+como antes,
+con esa calma
+que siempre me desarma.
+
+Caminábamos sin rumbo
+y por un instante
+todo volvió a sentirse
+como cuando todavía éramos nosotros.
+
+Me desperté con el corazón tranquilo,
+como si haberte visto en mis sueños
+hubiera sido la forma del universo
+de decirme que aún te guardo,
+pero ya sin dolor.
+
+Y entendí
+que hay personas que,
+aunque ya no estén,
+siguen visitando los lugares
+donde el alma descansa.
+
+No sé si te soñé
+o si viniste a verme
+mientras dormía.`
+        },
+        // --- POEMAS AÑADIDOS POR EL USUARIO (NUEVOS) ---
+        {
+            titulo: "11. El Miedo a los Comienzos",
+            contenido: `Son los comienzos los que me asustan, como si en cada uno tuviera que despedirme de lo que fui. Siempre me ha dado miedo lo nuevo: el primer día de clases, las primeras conversaciones cuando conoces a alguien, la primera llamada, el primer chiste compartido, o ese instante en el que algo —o alguien— comienza a ser parte de mi vida.
+
+Creo que me asustan los comienzos porque implican lo desconocido, porque nunca sé si voy a poder sentir lo mismo que antes, si mi risa sonará igual que lo hacía con otros amigos, si la primera llamada será incómoda, o si el nuevo hobby que comencé terminará sintiéndose como un error más.
+
+Creo que, en el fondo, lo que realmente me da miedo no es empezar algo nuevo, sino que nada vuelva a sentirse igual que antes. Me da miedo no volver a reír de la misma forma, no volver a amar como lo hice en su momento. A pesar de que en algún momento me sostuvo, me da miedo perder las versiones de mí que fueron felices, las que, aunque ya no estén, sé que sigo buscando en cada persona, en cada conversación, en cada intento de volver a empezar.
+
+Quizás por eso también odio tanto las despedidas, porque toda despedida es, sin quererlo, el principio de algo nuevo. Y empezar cuando aún no terminas de soltar duele. Es como si cada nuevo comienzo fuera una forma distinta de decir adiós. Pero creo que he aprendido que, tal vez, los comienzos no vienen a reemplazar lo que fue, sino a recordarte que todavía puedes sentir de nuevo; que lo que viviste no fue tu único momento de felicidad, sino una prueba de que eres capaz de volver a encontrarla.
+
+Que no todo lo nuevo tiene que doler, y que no todo lo que se fue significa que lo perdiste. A veces pesar es solo el reflejo del amor que le tuviste a lo que ya fue, y eso no quiere decir que seas débil; quiere decir que sentiste de verdad, y sentir incluso con miedo es una forma de seguir viviendo.
+
+Yo creo que tener miedo a los comienzos es solo otra forma de tener miedo a vivir, incluso si en el fondo lo único que deseas es vivir por completo`
+        },
+        {
+            titulo: "12. Cuéntame todo",
+            contenido: `“Cuéntame todo aunque no quiera oírlo”
+¿Sabes qué es lo peor
+
+de sentir que te vas a morir de celos?
+
+Que no te mueres.
+
+Cuéntame todo,
+
+aunque no quiera oírlo,
+
+y órame el misterio
+
+de entender quién eras
+
+cuando no eras mía.`
+        },
+        {
+            titulo: "13. Te felicito",
+            contenido: `Te felicito,
+
+te felicito por eso
+
+que no le cuentas a tus padres,
+
+por el esfuerzo que haces cada día
+
+por levantarte.
+Te felicito por querer
+
+mantener tus notas;
+
+sé que lo estás logrando
+
+aunque los demás no lo noten.
+Te felicito por las veces
+
+que te atreviste,
+
+y aun así caíste.
+
+No te conozco,
+
+pero tus esfuerzos sí reconozco.
+No sé quién eres,
+
+pero sé que luchas
+
+por convertirte
+
+en lo que quieres.
+Te felicito,
+
+pero tienes que descansar.
+
+La mente se desgasta,
+
+y para llegar a la meta
+
+a veces tienes que frenarte.`
+        },
+        {
+            titulo: "14. ¿Sabías cuánto te quiero?",
+            contenido: `¿Sabías cuánto te quiero?
+
+Tal vez te callarías un rato
+
+sobre eso de que nadie te ama.
+
+Tal vez se calmarían tus penas
+
+de sentir que nunca vas a ser amada.
+Porque tu amor eternamente en mí
+
+podría vivir.
+
+Porque yo eternamente podría amarte
+
+si tan solo me eligieras a mí.`
+        },
+        {
+            titulo: "15. No sé si puedas escuchar mis poemas",
+            contenido: `No sé si puedas escuchar mis poemas,
+
+pero pido que te oigan
+
+desde el mar
+
+hacia donde tú estás.
+No sé si puedas escuchar mi voz,
+
+pero cada palabra
+
+grita fuertemente tu nombre.
+No sé si puedas escucharme,
+
+pero te hablo
+
+como si estuvieras a mi lado,
+
+con mi corazón entregado
+
+y mi amor en tus manos.
+No pido que vuelvas,
+
+pero lo deseo
+
+desde el fondo de mi corazón,
+
+porque no me importaría esperar,
+
+porque sé que valdría la pena,
+
+porque eres diferente a los demás.
+Tus cambios son para bien,
+
+tu bondad y tu seriedad
+
+perfectas una con la otra.
+
+La forma en que ves el mundo
+
+cambió completamente el mío.
+No sé si aún piensas en mí,
+
+pero espero que leer lo que sentí
+
+te haga saber
+
+que alguien amó tu sentido.
+Y aunque tengas miedos o dudas,
+
+ojalá escuches el amor
+
+que salió de mis palabras,
+
+pidiendo que vuelvas.`
+        },
+        {
+            titulo: "16. Quizá lo nuestro era conocernos más",
+            contenido: `Quizá el amor sí existió,
+
+solo que no era eterno,
+
+era enseñanza.
+Tal vez no estábamos destinados
+
+a quedarnos,
+
+sino a encontrarnos
+
+justo cuando nos necesitábamos.
+No para durar,
+
+sino para despertar
+
+algo dormido en el otro.
+Y aunque duela aceptar
+
+que el camino termina,
+
+hay algo en mí
+
+que todavía te agradece
+
+por haber pasado.
+Porque incluso sin final feliz
+
+fuiste un capítulo
+
+que me cambió
+
+la manera de ver el amor.
+Tal vez no estábamos destinados a ser,
+
+pero gracias a ti
+
+aprendí a ser sin ti.
+No todo lo que termina
+
+fue un error:
+
+a veces
+
+solo fue infinito
+
+mientras duró.
+Quizá lo nuestro
+
+era conocernos más,
+
+más no estar juntos.`
+        },
+        {
+            titulo: "17. No puedo amarte porque soy un desastre",
+            contenido: `No puedo amarte
+
+porque soy un desastre,
+
+porque olvido contestar mensajes,
+
+porque siempre llego tarde
+
+y mi cuarto parece
+
+el reflejo de mi cabeza:
+
+un caos en todas partes.
+Porque tengo cosas
+
+que no sé explicar,
+
+porque hago chistes
+
+cuando quiero llorar
+
+y me escondo
+
+cuando más necesito
+
+que me ayuden a sanar.
+Porque me pierdo
+
+en mis pensamientos,
+
+porque complico todo
+
+y a veces alejo a la gente
+
+sin querer.
+Pero también soy
+
+la persona que recuerda
+
+tu canción favorita,
+
+que se ríe fuerte
+
+aunque el chiste sea malo.
+No puedo amarte, creo,
+
+porque temo que mis errores
+
+te cansen,
+
+que mis inseguridades
+
+pesen demasiado
+
+y que no me quieras a tu lado.
+Pero si después de todo
+
+tú sí quieres quedarte,
+
+si aun así
+
+terminas amando mi desastre…
+
+entonces creo
+
+que sí podré amarte.`
+        },
+        {
+            titulo: "18. Estoy lleno de empatía",
+            contenido: `Estoy lleno de empatía
+
+porque nunca fui
+
+el favorito de alguien,
+
+ni el mejor amigo
+
+al que todos buscan.
+Tuve que aprender
+
+a no esperar mucho
+
+para no salir herido.
+Nunca me hicieron
+
+una fiesta sorpresa,
+
+ni fui el primero
+
+en recibir una gran noticia.
+Y eso me hizo atento
+
+a los detalles
+
+que otros ignoran.
+Aprendí a preguntar
+
+si llegaron bien
+
+aunque a mí nadie me pregunte.
+Aprendí a cuidar con palabras
+
+porque sé lo que duele
+
+cuando no te cuidan.
+Me volví esa persona
+
+que abraza fuerte,
+
+porque sé lo que es
+
+dormir sintiendo
+
+que a nadie le importas.
+Sé lo que es estar
+
+en una habitación llena de gente
+
+y aun así sentirte solo.
+Estoy lleno de empatía
+
+porque me tocó entender
+
+sin que me explicaran.
+Aprendí a ver a los demás
+
+como me hubiese gustado
+
+que me vieran a mí.`
+        },
+        {
+            titulo: "19. Cuando no es recíproco",
+            contenido: `Qué feo cuando no es recíproco,
+
+cuando tienes que aceptar
+
+que lo estás pensando
+
+pero esa persona
+
+ni siquiera piensa en ti.
+Cuando amas
+
+a alguien que no te ama,
+
+cuando tu cabeza
+
+se inventa excusas
+
+para creer que lo que sientes
+
+es real,
+
+aunque no lo sea.
+Ahí entiendes
+
+que estás amando
+
+a alguien que no te ama,
+
+enamorándote de alguien
+
+que no se está enamorando de ti.
+Enamorándote
+
+de alguien que tiene
+
+a otra persona
+
+esperándolo en casa.
+O de alguien
+
+que nunca gustó de ti.
+Y esa es la parte más difícil:
+
+olvidarte de un amor
+
+que ni siquiera pasó,
+
+que no va a pasar,
+
+que es imposible.
+Y luchas
+
+con una tristeza
+
+que no entiendes
+
+de dónde sale.
+Cómo puedes enamorarte
+
+de alguien
+
+que no te dio
+
+ni una miserable señal.
+Es una de las tristezas
+
+más feas:
+
+olvidarse de un amor
+
+que ni siquiera
+
+pudiste saber
+
+si iba a ser o no.`
+        },
+        {
+            titulo: "20. Mi corazón le pertenece a alguien que no puedo tener",
+            contenido: `Mi corazón le pertenece
+
+a alguien que nunca
+
+podría tener.
+Y es que amarte
+
+se siente igual
+
+que intentar detener
+
+un tsunami.
+Me aferré a una historia
+
+que desde el principio
+
+sabía
+
+que nunca se iba a escribir.
+Pero prefería vivir
+
+de mentiras
+
+que morir
+
+de realidades.
+Quizá lo nuestro
+
+era conocernos más,
+
+mas nunca estar juntos.
+Y mientras lentamente
+
+de tu memoria
+
+me vas borrando
+
+sin gentileza,
+
+yo seguiré recordando
+
+por siempre
+
+unos ojos café
+
+que pusieron mi mundo
+
+de cabeza.`
+        },
+        {
+            titulo: "21. Qué fácil fue amarte, qué difícil olvidarte",
+            contenido: `Qué fácil fue llegar a amarte,
+
+pero qué difícil
+
+se me ha hecho olvidarte.
+Sentirte tan cerca
+
+es frustrante,
+
+porque sé que nunca
+
+llegaré a tocarte.
+Sé que me quieres,
+
+y tal vez mucho.
+
+Pero yo te amo.
+Yo te daría
+
+hasta lo que no tengo,
+
+mientras tú solo me das
+
+un poco de tu afecto.
+Y no te culpo:
+
+no puedes forzar el corazón.
+Cómo quisiera ser yo
+
+la razón de tus sonrisas,
+
+tus buenos días,
+
+el pensamiento
+
+que cruza tu mente
+
+aunque sea un instante.
+No sé qué tienes
+
+que me hace voltear a verte,
+
+soñarte,
+
+quererte.
+No puedo fingir
+
+que no te quiero,
+
+porque mis latidos
+
+me delatan,
+
+mis ojos brillan
+
+y mis manos tiemblan.
+Yo suspiro y sonrío,
+
+mientras tú
+
+solo me dices “amigo”.`
+        },
+        {
+            titulo: "22. ¿Por qué te amo si tú no me amas a mí?",
+            contenido: `¿Por qué te amo
+
+cuando tú no me amas a mí?
+¿Por qué sigo enamorado
+
+haciéndome daño
+
+cuando hace tiempo
+
+que por mí
+
+ya no eres feliz?
+¿Por qué sigo aquí
+
+si ya no estoy en tu futuro,
+
+si mucho menos
+
+puedo ser tu presente?
+Eres tan frío
+
+que me quema.
+No sé por qué sigo aquí
+
+sabiendo que nunca
+
+podrás mirarme
+
+de la misma manera
+
+que yo a ti.`
+        }
+    ];
+
+    let indicePoemaActual = 0;
+
+    // Función auxiliar para manejar el formato del poema (aunque pre-wrap lo hace bien, esta función es segura)
+    function formatPoemaContent(content) {
+        content = content.trim(); 
+        return content;
+    }
+
+    function mostrarPoema(indice) {
+        const poema = poemasData[indice];
+        document.getElementById('poema-titulo').innerText = poema.titulo;
+        document.getElementById('poema-display').innerText = poema.contenido;
+        document.getElementById('poema-contador').innerText = `Poema ${indice + 1} de ${poemasData.length}`;
+    }
+
+    function cambiarPoema(direccion) {
+        indicePoemaActual = (indicePoemaActual + direccion) % poemasData.length;
+        if (indicePoemaActual < 0) {
+            indicePoemaActual = poemasData.length - 1; // Loop al final
+        }
+        mostrarPoema(indicePoemaActual);
+    }
+    
+    function showPoemas() {
+        abrirInterfaz('poemas');
+        mostrarPoema(indicePoemaActual); 
+    }
+    
+    // --- MÓDULO DE MÚSICA ---
+    const musicIDs = [
+        'IPiA2ljRhvo', 'M0YKOq_lWSQ', 'PaoCQHwTPg4', '_Zb6bufU_AQ',
+        'pY-QvAMpnE', '8sY9Cf4HNfY', '7h2ryr_uUEs'
+    ];
+    
+    function showMusic() {
+        abrirInterfaz('music');
+        const musicLinksContainer = document.getElementById('music-links');
+        // Solo generar los iframes si no se han generado antes (para evitar recargas)
+        if (musicLinksContainer.innerHTML === '') {
+            musicIDs.forEach(id => {
+                const iframeHTML = `
+                    <div class="iframe-container">
+                        <iframe 
+                            width="100%" 
+                            height="250" 
+                            src="https://www.youtube.com/embed/${id}?controls=0" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            style="border-radius: 10px;"
+                        ></iframe>
+                    </div>
+                `;
+                musicLinksContainer.innerHTML += iframeHTML;
+            });
+        }
+    }
+    
+    function showVideos() {
+        abrirInterfaz('videos');
+    }
+
+    // --- MÓDULO DE NAVEGACIÓN Y PERSISTENCIA (Inicia aquí la segunda parte) ---
+// CONTINÚA EL CÓDIGO EN LA PARTE 2// CONTINUACIÓN DE LA PARTE 1
+    
+    // Carga los datos guardados al iniciar
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarDatos();
+        // Inicializa el primer poema después de cargar los datos
+        mostrarPoema(indicePoemaActual); 
+        // Asegurarse de que solo la interfaz 1 esté visible al inicio
+        document.getElementById("interfaz1").classList.remove("hidden");
+        document.getElementById("interfaz2").classList.add("hidden");
+        document.getElementById("interfaz3").classList.add("hidden");
+        // Ocultar todas las demás al cargar
+        document.getElementById('poemas').classList.add("hidden");
+        document.getElementById('music').classList.add("hidden");
+        document.getElementById('escribir').classList.add("hidden");
+        document.getElementById('videos').classList.add("hidden");
+        document.getElementById('final-image').classList.add("hidden");
+        document.getElementById('despedida').classList.add("hidden");
+    });
+
+    function cargarDatos() {
+        const nombre = localStorage.getItem('nombreUsuario');
+        const cumple = localStorage.getItem('cumpleUsuario');
+        const color = localStorage.getItem('colorUsuario');
+        const texto = localStorage.getItem('textoUsuario');
+
+        if (nombre) {
+            document.getElementById('nombre').value = nombre;
+            document.getElementById('nextButton').innerText = `¡Hola de nuevo, ${nombre}!`;
+            document.getElementById('nombre-saludo').innerText = nombre;
+            document.getElementById('menu-saludo').innerText = `¡Hola, ${nombre}! ¿Qué te gustaría ver ahora? ✨`;
+            // Asegurarse de que el span de saludo se vea si hay nombre
+            const spanSaludo = document.getElementById('nombre-saludo');
+            if (spanSaludo) spanSaludo.style.display = 'inline';
+        } else {
+            // Si no hay nombre, ocultamos el span vacío en interfaz2
+            const spanSaludo = document.getElementById('nombre-saludo');
+            if (spanSaludo) spanSaludo.style.display = 'none';
+        }
+
+        if (cumple) {
+            document.getElementById('cumple').value = cumple;
+        }
+
+        if (color) {
+            document.getElementById('colorFav').value = color;
+            actualizarColorFavCSS(color);
+        }
+        
+        if (texto) {
+            document.getElementById('textoUsuario').value = texto;
+        }
+    }
+
+    function actualizarColorFavCSS(color) {
+        document.documentElement.style.setProperty('--color-favorito', color);
+    }
+
+    function mostrarInterfaz2() {
+        document.getElementById("interfaz1").classList.add("hidden");
+        document.getElementById("interfaz2").classList.remove("hidden");
+        document.getElementById("nombre").focus();
+    }
+
+    function guardarDatos() {
+        let nombre = document.getElementById("nombre").value.trim();
+        let cumple = document.getElementById("cumple").value;
+        let color = document.getElementById("colorFav").value;
+
+        if (!nombre || !cumple || !color) {
+            alert("🚨 ¡Alto ahí! Por favor completa todos los datos (nombre, cumpleaños, color) antes de continuar 😊");
+            return;
+        }
+        
+        localStorage.setItem('nombreUsuario', nombre);
+        localStorage.setItem('cumpleUsuario', cumple);
+        localStorage.setItem('colorUsuario', color);
+
+        document.getElementById('menu-saludo').innerText = `¡Hola, ${nombre}! ¿Qué te gustaría ver ahora? ✨`;
+        actualizarColorFavCSS(color);
+        
+        document.getElementById("interfaz2").classList.add("hidden");
+        document.getElementById("interfaz3").classList.remove("hidden");
+    }
+
+    function abrirInterfaz(id) {
+        document.querySelectorAll(".center").forEach(div => {
+            if (div.id) div.classList.add("hidden");
+        });
+        document.getElementById(id).classList.remove("hidden");
+        document.getElementById("confirmacion").innerText = "";
+    }
+
+    function volverMenu() {
+        document.querySelectorAll(".center").forEach(div => {
+            if (div.id) div.classList.add("hidden");
+        });
+        document.getElementById("interfaz3").classList.remove("hidden");
+    }
+
+    function guardarTexto() {
+        let txt = document.getElementById("textoUsuario").value.trim();
+        
+        localStorage.setItem('textoUsuario', txt);
+
+        if (txt === "") {
+            document.getElementById("confirmacion").innerText = "El mensaje fue borrado (estaba vacío).";
+            return;
+        }
+
+        document.getElementById("confirmacion").innerText = "🎉 ¡Tu mensaje fue guardado y recordado para la próxima!";
+    }
+
+    function irADespedida() {
+        const nombre = localStorage.getItem('nombreUsuario') || 'amigo(a)';
+        document.getElementById('despedida-saludo').innerText = `¡Adiós, ${nombre}! Espero que te haya gustado ✨`;
+
+        document.querySelectorAll(".center").forEach(div => {
+            if (div.id) div.classList.add("hidden");
+        });
+        document.getElementById("despedida").classList.remove("hidden");
+    }
+
+    /* ✨ ESTRELLAS ALEATORIAS */
+    setInterval(() => {
+        const estrella = document.createElement("div");
+        estrella.classList.add("estrella");
+        estrella.style.cssText = `
+            left: ${Math.random() * 100}vw;
+            top: ${Math.random() * 100}vh;
+            animation-delay: -${Math.random() * 2}s;
+        `;
+        document.body.appendChild(estrella);
+        setTimeout(() => estrella.remove(), 4000);
+    }, 300);
+
+    /* 💖 CORAZÓN SIGUE AL CURSOR */
+    document.addEventListener("mousemove", e => { 
+        const corazon = document.createElement("div");
+        corazon.classList.add("corazon");
+        corazon.textContent = "💖";
+        corazon.style.left = e.pageX + "px";
+        corazon.style.top = e.pageY + "px";
+        document.body.appendChild(corazon);
+
+        setTimeout(() => corazon.remove(), 1200);
+    });
+
+    // Escuchar cambios en el selector de color para aplicar el cambio en vivo al CSS
+    document.getElementById("colorFav").addEventListener('input', (e) => {
+        actualizarColorFavCSS(e.target.value);
+    });
+</script>
+
+</body>
+</html>
